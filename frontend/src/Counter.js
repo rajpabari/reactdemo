@@ -12,7 +12,7 @@ function Counter(props) {
     });
 
     const [newCounter, setNewCounter] = useState(0);
-    const [isPasswordCorrect, setIsPasswordCorrect] = useState(false);
+    const [userPasswordCorrect, setUserPasswordCorrect] = useState("");
 
     useEffect(() => { console.log("newCounter changed") }, [newCounter]);
 
@@ -24,7 +24,12 @@ function Counter(props) {
         e.preventDefault();
         const input = e.target[0].value;
         const output = await invokeLambda("passwordChecker", { password: input });
-        setIsPasswordCorrect(output.correct);
+        if (output.correct) {
+            setUserPasswordCorrect("Correct Password!");
+        }
+        else {
+            setUserPasswordCorrect("Incorrect Password");
+        }
         console.log(input);
         console.log(output);
     }
@@ -35,8 +40,7 @@ function Counter(props) {
                 <input type="text" placeholder="Guess the secret code" />
                 <button type="submit">Submit</button>
             </form>
-
-            {isPasswordCorrect ? <p>Correct Password!</p> : <p>Incorrect Password</p>}
+            <p>{userPasswordCorrect}</p>
 
 
             <h1>Welcome to your Dashboard, {props.name} You are {props.age} years old </h1>
