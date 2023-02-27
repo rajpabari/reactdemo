@@ -1,19 +1,30 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import { invokeLambda } from "./utils";
+import AWS from 'aws-sdk';
 
 function Counter(props) {
 
-    const [newCounter, setNewCounter] = useState(0)
+    AWS.config.update({
+        accessKeyId: "",
+        secretAccessKey: "",
+        region: 'us-west-1'
+    });
 
-    useEffect(() => { console.log("newCounter changed") }, [newCounter])
+    const [newCounter, setNewCounter] = useState(0);
+
+    useEffect(() => { console.log("newCounter changed") }, [newCounter]);
 
     function handleClick() {
-        setNewCounter(newCounter + 1)
+        setNewCounter(newCounter + 1);
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        console.log(e.target[0].value);
+        const input = e.target[0].value;
+        const output = await invokeLambda("passwordChecker", { password: input });
+        console.log(input);
+        console.log(output);
     }
 
     return (
