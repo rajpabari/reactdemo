@@ -2,6 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  function handleClick() {
+    console.log("Button Clicked");
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,6 +14,7 @@ function App() {
         <p>
           Edit Sheden <code>src/App.js</code> and save to reload.
         </p>
+        <button onClick={handleClick} >Click me</button>
         <a
           className="App-link"
           href="https://reactjs.org"
