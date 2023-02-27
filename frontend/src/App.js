@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
 
-  var counter = 0;
+  const [newCounter, setNewCounter] = useState(0);
 
   function handleClick() {
-    counter++;
+    setNewCounter(newCounter + 1);
     console.log("Button Clicked");
   }
 
@@ -18,7 +19,7 @@ function App() {
           Edit Sheden <code>src/App.js</code> and save to reload.
         </p>
         <button onClick={handleClick} >Click me</button>
-        <p>Button clicked {counter} times</p>
+        <p>Button clicked {newCounter} times</p>
         <a
           className="App-link"
           href="https://reactjs.org"
