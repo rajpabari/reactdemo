@@ -11,8 +11,19 @@ function Counter(props) {
         setNewCounter(newCounter + 1)
     }
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log(e.target[0].value);
+    }
+
     return (
         <>
+            <form onSubmit={handleSubmit}>
+                <input type="text" placeholder="Guess the secret code" />
+                <button type="submit">Submit</button>
+            </form>
+
+
             <h1>Welcome to your Dashboard, {props.name} You are {props.age} years old </h1>
             <button onClick={handleClick} >Click me</button>
             <p>Button clicked {newCounter} times</p>
